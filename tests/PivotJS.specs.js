@@ -1,10 +1,11 @@
+
 describe("PivotJS", function() {
  
 	it("when providing a list of values, it will return a list of those distinct values.", function(){
 
 		var list = ['a', 'b', 'b', 'c', 'd', 'd', 'd'];
 
-		var distinct = createDistinctValuesFromList(list);
+		var distinct = _pivotJS.createDistinctValuesFromList(list);
 
 		expect(distinct).toEqual(['a', 'b', 'c', 'd']);
 	});
@@ -20,7 +21,7 @@ describe("PivotJS", function() {
 					{ name : 'd' },
 					{ name : 'd' }];
 
-		var values = createValuesFromListOfObjects(list, 'name');
+		var values = _pivotJS.createValuesFromListOfObjects(list, 'name');
 
 		expect(values).toEqual(['a', 'b', 'b', 'c', 'd', 'd', 'd'])
 	});
@@ -36,7 +37,7 @@ describe("PivotJS", function() {
 						{fruit : 'banana', a : [], b: [], c : [], d : []},
 						{fruit : 'carrot', a : [], b: [], c : [], d : []}];
 
-		var rows = createPivotRows(rowHeader, distinctRowValues, columnHeaders);
+		var rows = _pivotJS.createPivotRows(rowHeader, distinctRowValues, columnHeaders);
 
 		expect(rows).toEqual(expected);
 	});
@@ -56,7 +57,7 @@ describe("PivotJS", function() {
 		var expected = [{'fruit' : 'apple', 'a' : [0], 'b': [1], 'c' : [3]},
 						{'fruit' : 'banana', 'a' : [6], 'b': [9], 'c' : [2]}];
 
-		var rows = mapDatumToColumnHeaders(originalData, privotedRows, 'fruit', 'name', 'value');
+		var rows = _pivotJS.mapDatumToColumnHeaders(originalData, privotedRows, 'fruit', 'name', 'value');
 
 		expect(rows).toEqual(expected);			
 	});
@@ -79,7 +80,7 @@ describe("PivotJS", function() {
 			return sum;
 		};
 
-		var rows = reduceColumnValues(pivotedRows, ['a', 'b', 'c'], aggregation);
+		var rows = _pivotJS.reduceColumnValues(pivotedRows, ['a', 'b', 'c'], aggregation);
 
 		expect(rows).toEqual(expected);
 	});
@@ -117,9 +118,7 @@ describe("PivotJS", function() {
 				}
 			};
 
-		var pivot = new PivotJS(config);
-		var actual = pivot.execute(originalData);
-
+		var actual = pivotJS(config, originalData);
 
 		expect(actual).toEqual(expected);
 	});
