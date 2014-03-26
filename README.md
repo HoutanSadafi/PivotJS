@@ -37,6 +37,8 @@ var config = {
 
 ```
 
+### Running
+
 Calling PivotJS with the above data source and configuration will generate an array of objects, with each row being a unique date, and a property per fruit, with the property value being the summation of the count property.
 
 ```javascript
