@@ -11,13 +11,14 @@ PivotJS takes a configuration object which defines the pivot row, column, datum 
 
 ```javascript
 
-//configuration for the following table
+//configuration for the following table:
 var source = [{ date: '2014-03-15', fruit : 'Apple', count: 1 },
               { date: '2014-03-15', fruit : 'Apple', count: 4 },
               { date: '2014-03-16', fruit : 'Banana', count: 3 },
               { date: '2014-03-15', fruit : 'Banana', count: 3 },
               { date: '2014-03-15', fruit : 'Banana', count: 1 },
-              { date: '2014-03-16', fruit : 'Banana', count: 3 }];
+              { date: '2014-03-16', fruit : 'Banana', count: 3 },
+              { date: '2014-03-17', fruit : 'Orange', count: 17 }];
 
 var config = {
   row : 'date',
@@ -33,5 +34,19 @@ var config = {
 		  return sum;
   }
 };
+
+```
+
+Calling PivotJS with the above data source and configuration will generate an array of objects, with each row being a unique date, and a property per fruit, with the property value being the summation of the count property.
+
+```javascript
+
+var result = pivotJS(config, source);
+
+//result would like this:
+
+var result = [{date: '2014-03-15', Apple: 5, Banana: 4, Orange: 0 },
+	      {date: '2014-03-16', Apple: 0, Banana: 6, Orange 0 },
+	      {date: '2014-03-17', Apple: 0, Banana: 0, Orange: 17}];
 
 ```
